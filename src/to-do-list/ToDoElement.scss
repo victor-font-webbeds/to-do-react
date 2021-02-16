@@ -1,0 +1,37 @@
+.toDoElement {
+  margin: 1em;
+  padding: 2em;
+  background-color: rgb(243, 239, 239);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: flex;
+  justify-content: space-between;
+
+  .MuiSvgIcon-root {
+    cursor: pointer;
+  }
+}
+
+.done {
+  background-color: rgba(82, 211, 82, 0.671);
+}
+
+.toDoElement__function {
+  flex: 0.9;
+  display: flex;
+  align-items: center;
+  .MuiSvgIcon-root {
+    margin-right: 2em;
+  }
+
+  .MuiSvgIcon-root:hover {
+    color: green;
+  }
+}
+
+.toDoElement__remove {
+  flex: 0.1;
+
+  .MuiSvgIcon-root:hover {
+    color: red;
+  }
+}
