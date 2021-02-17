@@ -1,6 +1,6 @@
 import "./App.css";
-import Header from "./header/Header";
-import ToDoPanel from "./to-do-list/ToDoPanel";
+import { Header } from "./components";
+import { ToDoPanel } from "./to-do-list";
 
 function App() {
   return (

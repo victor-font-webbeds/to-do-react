@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ToDoElement from "./ToDoElement";
-import ToDoHeader from "./ToDoHeader";
+import { ToDoElement } from "../to-do-element";
+import { ToDoHeader } from "../to-do-header";
 import "./ToDoPanel.scss";
 
 const ToDoPanel = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./ToDoElement.scss";
 import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
