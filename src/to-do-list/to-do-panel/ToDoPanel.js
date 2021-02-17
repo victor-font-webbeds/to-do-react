@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ToDoElement } from "../to-do-element";
 import { ToDoHeader } from "../to-do-header";
 import "./ToDoPanel.scss";
+import server from "axios";
 
 const ToDoPanel = () => {
-  const [toDoList, setToDoList] = useState([
-    { title: "Use Redus", isDone: true },
-    { title: "Use Typescript", isDone: false },
-    { title: "Use Reducer", isDone: true },
-  ]);
+  const [toDoList, setToDoList] = useState([]);
+  useEffect(() => {
+    server
+      .get(`https://todo-api-zeta.vercel.app/`)
+      .then((res) => {
+        setToDoList(res.data);
+        console.log(toDoList);
+      })
+      .catch((e) => {
+        console.log("What an error `" + e + "`");
+      });
+  }, []);
 
   const handleAddToDoElement = (e) => {
-    setToDoList([...toDoList, { title: e, isDone: false }]);
+    setToDoList([...toDoList, { name: e, complete: false }]);
   };
 
   const handleDelete = (i) => {
-    var toDoListCopy = [...toDoList];
-    toDoListCopy.splice(i, 1);
-    setToDoList(toDoListCopy);
+    setToDoList(toDoList.filter((x) => x.id !== i));
   };
 
   const changeStatus = (i) => {
     const toDoListCopy = [...toDoList];
-    let toDoElement = toDoListCopy[i];
-    toDoElement.isDone = !toDoElement.isDone;
+    let toDoElement = toDoListCopy[toDoListCopy.findIndex((x) => x.id === i)];
+    toDoElement.complete = !toDoElement.complete;
     toDoListCopy[i] = toDoElement;
     setToDoList(toDoListCopy);
   };
@@ -32,16 +38,16 @@ const ToDoPanel = () => {
     <div className="toDoPanel">
       <ToDoHeader
         totalTasks={toDoList.length}
-        doneTasks={toDoList.filter((x) => x.isDone == true).length}
+        doneTasks={toDoList.filter((x) => x.complete == true).length}
         onEnter={handleAddToDoElement}
       ></ToDoHeader>
       {toDoList.map((e, i) => (
         <ToDoElement
           key={i}
-          status={e.isDone}
-          title={e.title}
-          onClick={() => handleDelete(i)}
-          changeStatus={() => changeStatus(i)}
+          status={e.complete}
+          title={e.name}
+          onClick={() => handleDelete(e.id)}
+          changeStatus={() => changeStatus(e.id)}
         ></ToDoElement>
       ))}
     </div>
