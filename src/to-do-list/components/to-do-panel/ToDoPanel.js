@@ -3,6 +3,7 @@ import { ToDoElement } from "../to-do-element";
 import { ToDoHeader } from "../to-do-header";
 import "./ToDoPanel.scss";
 import { ToDoContext } from "../../context/ToDoContext";
+import ToDoPanelLoading from "./ToDoPanelLoading";
 
 const ToDoPanel = () => {
   const { toDoState, toDoDispatch } = useContext(ToDoContext);
@@ -15,18 +16,16 @@ const ToDoPanel = () => {
           toDoState?.toDoList.filter((x) => x.complete == true).length ?? 0
         }
       ></ToDoHeader>
-      {toDoState?.toDoList?.length > 0 ? (
-        toDoState.toDoList.map((e, i) => (
+      <ToDoPanelLoading>
+        {toDoState.toDoList.map((e, i) => (
           <ToDoElement
             key={i}
             id={e.id}
             complete={e.complete}
             title={e.name}
           ></ToDoElement>
-        ))
-      ) : (
-        <p>do something</p>
-      )}
+        ))}
+      </ToDoPanelLoading>
     </div>
   );
 };

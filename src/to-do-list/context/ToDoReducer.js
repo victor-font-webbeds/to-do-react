@@ -4,6 +4,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         toDoList: [...state.toDoList, ...action.payload],
+        status: "SUCCESS",
       };
 
     case "ADD_NEW":
@@ -17,6 +18,7 @@ export const reducer = (state, action) => {
             complete: false,
           },
         ],
+        status: "SUCCESS",
       };
 
     case "REMOVE":
@@ -35,6 +37,10 @@ export const reducer = (state, action) => {
           return x;
         }),
       };
+
+    case "DOWNLOAD_ERROR": {
+      return { ...state, status: "ERROR" };
+    }
 
     default:
       return state;
