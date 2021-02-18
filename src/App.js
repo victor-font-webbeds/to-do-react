@@ -1,12 +1,15 @@
 import "./App.css";
 import { Header } from "./components";
 import { ToDoPanel } from "./to-do-list";
+import ToDoContextProvider from "./to-do-list/context/ToDoContext";
 
 function App() {
   return (
     <div className="App">
       <Header></Header>
-      <ToDoPanel></ToDoPanel>
+      <ToDoContextProvider>
+        <ToDoPanel />
+      </ToDoContextProvider>
     </div>
   );
 }

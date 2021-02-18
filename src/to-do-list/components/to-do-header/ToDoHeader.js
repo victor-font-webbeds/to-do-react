@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./ToDoHeader.scss";
+import { ToDoContext } from "../../context/ToDoContext";
 
-const ToDoHeader = ({ totalTasks, doneTasks, onEnter }) => {
+const ToDoHeader = ({ totalTasks, doneTasks }) => {
+  const { toDoState, toDoDispatch } = useContext(ToDoContext);
   const [input, setInput] = useState("");
 
   const handleAddElement = (e) => {
     e.preventDefault();
 
-    onEnter(input);
+    toDoDispatch({ type: "ADD_NEW", payload: input });
     setInput("");
   };
 
@@ -21,7 +23,7 @@ const ToDoHeader = ({ totalTasks, doneTasks, onEnter }) => {
     <div className="toDoHeader">
       <div className="toDoHeader__info">
         <h3>Total tasks {totalTasks}</h3>
-        <h3>Done Tasks {doneTasks}</h3>
+        <h3>Tasks done {doneTasks}</h3>
       </div>
       <div className="toDoHeader__add">
         <input

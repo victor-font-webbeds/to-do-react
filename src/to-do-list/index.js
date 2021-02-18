@@ -1,3 +1,3 @@
-import { ToDoPanel } from "./to-do-panel";
+import { ToDoPanel } from "./components/to-do-panel";
 
 export { ToDoPanel };
